@@ -26,7 +26,7 @@ module.exports = class AppRoot extends React.Component {
         return (
             /* jshint ignore:start */
             <div className="container-fluid">
-                <NavBar authService={this.props.authService} isAuthenticated={this.state.isAuthenticated}/>
+                <NavBar authService={this.props.authService} isAuthenticated={this.state.isAuthenticated} location={this.props.location}/>
                 <Switch>
                     <Route path="/home" component={Home}/>
                     <Route path="/login" render={(routeProps) => <Login isAuthenticated={this.state.isAuthenticated} authService={this.props.authService} {...routeProps} />}/>
