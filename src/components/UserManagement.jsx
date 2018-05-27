@@ -1,45 +1,33 @@
-var React = require('react');
-var Redirect = require('react-router-dom').Redirect;
-var PropTypes = require('prop-types');
+import Redirect from "react-router-dom";
+import React from "react";
 
-module.exports = class UserManagement extends React.Component {
+const UserManagement = class UserManagement extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { redirectToLogin: false };
+    // This line is important!
+    this.logout = this.logout.bind(this);
+  }
 
-    constructor(props) {
-        super(props);
-        this.state = {redirectToLogin:false};
-        // This line is important!
-        this.logout = this.logout.bind(this);
+  logout() {
+    this.props.authService.logout();
+    this.setState({ redirectToLogin: true });
+  }
+
+  render() {
+    if (this.state.redirectToLogin) {
+      return <Redirect to="/login" />;
     }
-
-    logout() {
-        this.props.authService.logout();
-        this.setState({redirectToLogin:true});
-    }
-
-    render() {
-         if (this.state.redirectToLogin) {
-            return (
-                /* jshint ignore:start */
-                <Redirect to='/login'/>
-                /* jshint ignore:end */
-            );
-        }
-        return (
-            /* jshint ignore:start */
-
-            <div className="container">
-                <div className="center-form panel">
-                    <div className="jumbotron" onClick={this.logout}>
-                        <h1 className="text-center">Click me to log out</h1>
-                    </div>
-                </div>
-            </div>
-            /* jshint ignore:end */
-        );
-    }
+    return (
+      <div className="container">
+        <div className="center-form panel">
+          <div className="jumbotron" onClick={this.logout}>
+            <h1 className="text-center">Click me to log out</h1>
+          </div>
+        </div>
+      </div>
+    );
+  }
 };
 
-// Ask for 'router' from context
-module.exports.contextTypes = {
-    router: PropTypes.object.isRequired
-};
+export default UserManagement;

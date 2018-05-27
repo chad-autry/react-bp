@@ -1,18 +1,21 @@
-var Route = require('react-router-dom').Route;
-var Redirect = require('react-router-dom').Redirect;
-var React = require('react');
+import { Route, Redirect } from "react-router-dom";
+import React from "react";
 
-module.exports = ({ component: Component, ...rest }) => (
-  /* jshint ignore:start */
-  <Route {...rest} render={props => (
-    rest.authService.isAuthenticated() ? (
-      <Component {...rest}/>
-    ) : (
-      <Redirect to={{
-        pathname: '/login',
-        state: { from: props.location }
-      }}/>
-    )
-  )}/>
-  /* jshint ignore:end */
+const AuthorizingRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      rest.authService.isAuthenticated() ? (
+        <Component {...rest} />
+      ) : (
+        <Redirect
+          to={{
+            pathname: "/login",
+            state: { from: props.location }
+          }}
+        />
+      )
+    }
+  />
 );
+export default AuthorizingRoute;
