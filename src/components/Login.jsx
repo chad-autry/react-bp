@@ -9,6 +9,8 @@ const Login = class Login extends React.Component {
   render() {
     if (this.props.isAuthenticated) {
       return <Redirect to="/home" />;
+    } else if (this.props.pendingUserCreation) {
+      return <Redirect to="/tos" />;
     }
     return (
       <div className="container">
@@ -35,8 +37,9 @@ const Login = class Login extends React.Component {
               />
               <i className="fa form-control-feedback fa-key"> </i>
             </div>
-            <button className="btn btn-lg btn-block btn-success"
-            onClick={() => this.props.authService.login("google")}>
+            <button
+              className="btn btn-lg btn-block btn-success"
+              onClick={() => this.props.authService.login("google")}>
               Log in
             </button>
             <br />

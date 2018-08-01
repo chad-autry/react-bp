@@ -15,7 +15,7 @@ import authjwt from "client-auth-jwt/src/Auth.js";
     "34478033913-h13qnl7mfako0ean3uv6c9s6f8ujafki.apps.googleusercontent.com";
   authService.ProviderOAuthConfigs.google.redirectUri =
     window.location.origin + "/react-bp/googleStaticAuth.html";
-  authService.originRmiService = {login:()=>true};
+  authService.originRmiService = { login: () => true };
   //This function is attached to execute when the window loads
   document.addEventListener("DOMContentLoaded", function() {
     ReactDOM.render(

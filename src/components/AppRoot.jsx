@@ -13,10 +13,22 @@ const AppRoot = class AppRoot extends React.Component {
     //Register for Authentication state changes
     this.props.authService.onAuthChange(() => {
       this.setState({
-        isAuthenticated: this.props.authService.isAuthenticated()
+        pendingUserCreation:
+          this.props.authService.isAuthenticated() &&
+          !!this.props.authService.getPayload().pendingUserCreation,
+        isAuthenticated:
+          this.props.authService.isAuthenticated() &&
+          !this.props.authService.getPayload().pendingUserCreation
       });
     });
-    this.state = { isAuthenticated: this.props.authService.isAuthenticated() };
+    this.state = {
+      pendingUserCreation:
+        this.props.authService.isAuthenticated() &&
+        !!this.props.authService.getPayload().pendingUserCreation,
+      isAuthenticated:
+        this.props.authService.isAuthenticated() &&
+        !this.props.authService.getPayload().pendingUserCreation
+    };
   }
 
   render() {
