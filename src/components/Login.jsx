@@ -13,7 +13,7 @@ const Login = class Login extends React.Component {
       return <Redirect to="/tos" />;
     }
     return (
-      <div className="container">
+      <div>
         <div className="center-form panel">
           <div className="panel-body">
             <h2 className="text-center">Log in </h2>
