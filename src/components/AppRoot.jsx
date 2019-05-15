@@ -6,6 +6,7 @@ import { Route, Redirect, Switch } from "react-router-dom";
 import Login from "./Login.jsx";
 import UserManagement from "./UserManagement.jsx";
 import Home from "./Home.jsx";
+import TOS from "./TOS.jsx";
 
 const AppRoot = class AppRoot extends React.Component {
   constructor(props) {
@@ -45,6 +46,16 @@ const AppRoot = class AppRoot extends React.Component {
             path="/login"
             render={routeProps => (
               <Login
+                isAuthenticated={this.state.isAuthenticated}
+                authService={this.props.authService}
+                {...routeProps}
+              />
+            )}
+          />
+          <Route
+            path="/tos"
+            render={routeProps => (
+              <TOS
                 isAuthenticated={this.state.isAuthenticated}
                 authService={this.props.authService}
                 {...routeProps}
