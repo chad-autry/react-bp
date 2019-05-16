@@ -19,7 +19,8 @@ const Login = class Login extends React.Component {
             <h2 className="text-center">Log in </h2>
             <h6 className="text-center">
               react-bp has a mock backend which is hard coded to log you in as
-              &apos;John Doe&apos;{" "}
+              &apos;John Doe&apos; when using google sign in.
+              It will act as if the user does not exist when using username + password{" "}
             </h6>
             <div className="form-group has-feedback">
               <input
@@ -39,7 +40,9 @@ const Login = class Login extends React.Component {
             </div>
             <button
               className="btn btn-lg btn-block btn-success"
-              onClick={() => this.props.authService.login("google")}>
+              onClick={() => this.props.fetchService.getJson('/login', 'application/json', (json) => {
+                  this.props.authService.setToken(json.token);
+              })}>
               Log in
             </button>
             <br />

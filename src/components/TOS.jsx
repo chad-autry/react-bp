@@ -19,6 +19,9 @@ const TOS = class TOS extends React.Component {
     if (this.props.isAuthenticated) {
       return <Redirect to="/home" />;
     }
+    if (!this.props.pendingUserCreation) {
+      return <Redirect to="/login" />;
+    }
     return (
       <div>
         <div className="center-form panel">
@@ -44,8 +47,18 @@ const TOS = class TOS extends React.Component {
                   ? "btn btn-lg btn-block btn-success"
                   : "btn btn-lg btn-block btn-success disabled"
               }
-              onClick={() => this.props.authService.login("google")}>
+              onClick={() => {
+                  if (this.state.tosChecked) {
+                      this.props.fetchService.getJsonWithAuth('/login', 'application/json', (json) => {
+                       this.props.authService.setToken(json.token);})
+                  }
+              }}>
               Create User
+            </button>
+            <button
+              className="btn btn-lg btn-block btn-success"
+              onClick={() => this.props.authService.logout()}>
+              Cancel
             </button>
           </div>
         </div>

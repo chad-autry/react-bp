@@ -13,6 +13,7 @@ const AppRoot = class AppRoot extends React.Component {
     super(props);
     //Register for Authentication state changes
     this.props.authService.onAuthChange(() => {
+      let payLoad = this.props.authService.getPayload();
       this.setState({
         pendingUserCreation:
           this.props.authService.isAuthenticated() &&
@@ -22,6 +23,7 @@ const AppRoot = class AppRoot extends React.Component {
           !this.props.authService.getPayload().pendingUserCreation
       });
     });
+    let payLoad = this.props.authService.getPayload();
     this.state = {
       pendingUserCreation:
         this.props.authService.isAuthenticated() &&
@@ -37,6 +39,7 @@ const AppRoot = class AppRoot extends React.Component {
       <div className="container-fluid">
         <NavBar
           authService={this.props.authService}
+          pendingUserCreation={this.state.pendingUserCreation}
           isAuthenticated={this.state.isAuthenticated}
           location={this.props.location}
         />
@@ -47,6 +50,8 @@ const AppRoot = class AppRoot extends React.Component {
             render={routeProps => (
               <Login
                 isAuthenticated={this.state.isAuthenticated}
+                pendingUserCreation={this.state.pendingUserCreation}
+                fetchService={this.props.fetchService}
                 authService={this.props.authService}
                 {...routeProps}
               />
@@ -57,6 +62,8 @@ const AppRoot = class AppRoot extends React.Component {
             render={routeProps => (
               <TOS
                 isAuthenticated={this.state.isAuthenticated}
+                pendingUserCreation={this.state.pendingUserCreation}
+                fetchService={this.props.fetchService}
                 authService={this.props.authService}
                 {...routeProps}
               />
