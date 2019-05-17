@@ -6,7 +6,7 @@ import { Route, Redirect, Switch } from "react-router-dom";
 import Login from "./Login.jsx";
 import UserManagement from "./UserManagement.jsx";
 import Home from "./Home.jsx";
-import TOS from "./TOS.jsx";
+import Policy from "./Policy.jsx";
 
 const AppRoot = class AppRoot extends React.Component {
   constructor(props) {
@@ -58,9 +58,9 @@ const AppRoot = class AppRoot extends React.Component {
             )}
           />
           <Route
-            path="/tos"
+            path="/policy"
             render={routeProps => (
-              <TOS
+              <Policy
                 isAuthenticated={this.state.isAuthenticated}
                 pendingUserCreation={this.state.pendingUserCreation}
                 fetchService={this.props.fetchService}

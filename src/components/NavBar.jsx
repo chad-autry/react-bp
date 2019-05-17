@@ -72,7 +72,7 @@ const NavBar = class NavBar extends React.Component {
           </ul>
           <ul className="nav navbar-nav navbar-right">
             <NavItem
-              to={this.props.isAuthenticated ? "/userMgmnt" : this.props.pendingUserCreation ? "/tos" : "/login"}
+              to={this.props.isAuthenticated ? "/userMgmnt" : this.props.pendingUserCreation ? "/policy" : "/login"}
               location={this.props.location}>
               <i
                 className={

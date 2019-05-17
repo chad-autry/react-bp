@@ -10,7 +10,7 @@ const Login = class Login extends React.Component {
     if (this.props.isAuthenticated) {
       return <Redirect to="/home" />;
     } else if (this.props.pendingUserCreation) {
-      return <Redirect to="/tos" />;
+      return <Redirect to="/policy" />;
     }
     return (
       <div>
