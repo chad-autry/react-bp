@@ -23,8 +23,19 @@ const AppRoot = class AppRoot extends React.Component {
           !this.props.authService.getPayload().pendingUserCreation
       });
     });
+    this.props.fetchService.listen('/backend/policyAccepted', (beginRequest) => {
+      this.setState({
+        fetchingPolicyAccepted: beginRequest
+      });
+    });
+    this.props.fetchService.listen('/backend/login', (beginRequest) => {
+      this.setState({
+        logingOn: beginRequest
+      });
+    });
     let payLoad = this.props.authService.getPayload();
     this.state = {
+      fetchingPolicyAccepted: false,
       pendingUserCreation:
         this.props.authService.isAuthenticated() &&
         !!this.props.authService.getPayload().pendingUserCreation,
@@ -52,6 +63,7 @@ const AppRoot = class AppRoot extends React.Component {
                 isAuthenticated={this.state.isAuthenticated}
                 pendingUserCreation={this.state.pendingUserCreation}
                 fetchService={this.props.fetchService}
+                logingOn={this.state.logingOn}
                 authService={this.props.authService}
                 {...routeProps}
               />
@@ -63,6 +75,7 @@ const AppRoot = class AppRoot extends React.Component {
               <Policy
                 isAuthenticated={this.state.isAuthenticated}
                 pendingUserCreation={this.state.pendingUserCreation}
+                fetchingPolicyAccepted={this.state.fetchingPolicyAccepted}
                 fetchService={this.props.fetchService}
                 authService={this.props.authService}
                 {...routeProps}
