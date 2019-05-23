@@ -13,7 +13,6 @@ const AppRoot = class AppRoot extends React.Component {
     super(props);
     //Register for Authentication state changes
     this.props.authService.onAuthChange(() => {
-      let payLoad = this.props.authService.getPayload();
       this.setState({
         pendingUserCreation:
           this.props.authService.isAuthenticated() &&
@@ -23,17 +22,16 @@ const AppRoot = class AppRoot extends React.Component {
           !this.props.authService.getPayload().pendingUserCreation
       });
     });
-    this.props.fetchService.listen('/backend/policyAccepted', (beginRequest) => {
+    this.props.fetchService.listen("/backend/policyAccepted", beginRequest => {
       this.setState({
         fetchingPolicyAccepted: beginRequest
       });
     });
-    this.props.fetchService.listen('/backend/login', (beginRequest) => {
+    this.props.fetchService.listen("/backend/login", beginRequest => {
       this.setState({
         logingOn: beginRequest
       });
     });
-    let payLoad = this.props.authService.getPayload();
     this.state = {
       fetchingPolicyAccepted: false,
       pendingUserCreation:

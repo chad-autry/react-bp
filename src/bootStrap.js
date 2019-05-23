@@ -16,26 +16,34 @@ import FetchService from "./FetchService.js";
   fetchService.setAuthService(authService);
 
   //react-bp gh-pages stub out the fetch service
-  fetchService.getJson = (url, contentType, andThen, noAndThen, params) => {
-        if (!!fetchService.requestListener[url]) {
-            fetchService.requestListener[url](true);
-        }
-       setTimeout(()=> {
-      andThen({token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwicGVuZGluZ1VzZXJDcmVhdGlvbiI6dHJ1ZX0.BiTZdKh4TtO-s76NE_caKlu4hRwjM6oxHQnzg68wIvs"});
-      if (!! fetchService.requestListener[url]) {
-            fetchService.requestListener[url](false)
-      }}, 5000);
+  fetchService.getJson = (url, contentType, andThen) => {
+    if (fetchService.requestListener[url]) {
+      fetchService.requestListener[url](true);
+    }
+    setTimeout(() => {
+      andThen({
+        token:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwicGVuZGluZ1VzZXJDcmVhdGlvbiI6dHJ1ZX0.BiTZdKh4TtO-s76NE_caKlu4hRwjM6oxHQnzg68wIvs"
+      });
+      if (fetchService.requestListener[url]) {
+        fetchService.requestListener[url](false);
+      }
+    }, 5000);
   };
-  fetchService.getJsonWithAuth = (url, contentType, andThen, noAndThen, params) => {
-        if (!!fetchService.requestListener[url]) {
-            fetchService.requestListener[url](true);
-        }
+  fetchService.getJsonWithAuth = (url, contentType, andThen) => {
+    if (fetchService.requestListener[url]) {
+      fetchService.requestListener[url](true);
+    }
 
-      setTimeout(()=> {
-      andThen({token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UifQ.xuEv8qrfXu424LZk8bVgr9MQJUIrp1rHcPyZw_KSsds"});
-      if (!! fetchService.requestListener[url]) {
-            fetchService.requestListener[url](false)
-      }}, 5000);
+    setTimeout(() => {
+      andThen({
+        token:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UifQ.xuEv8qrfXu424LZk8bVgr9MQJUIrp1rHcPyZw_KSsds"
+      });
+      if (fetchService.requestListener[url]) {
+        fetchService.requestListener[url](false);
+      }
+    }, 5000);
   };
   // Configure the authService
   authService.ProviderOAuthConfigs.google.clientId =
