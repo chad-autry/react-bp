@@ -77,7 +77,7 @@ const Login = class Login extends React.Component {
               className="btn btn-block btn-google"
               onClick={() => this.props.authService.authenticate("google")}>
               <i className="fa fa-google"> </i>
-              sign in with Google
+              &nbsp;sign in with Google
             </button>
           </div>
         </div>
